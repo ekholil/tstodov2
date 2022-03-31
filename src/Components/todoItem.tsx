@@ -7,11 +7,11 @@ interface Todo {
 
 export default function TodoItem({
     todo,
-    onEditClick,
+    
     onDeleteClick
   }:{
     todo: Todo,
-    onEditClick: (todo: Todo) => void,
+    
     onDeleteClick: (id: number) => void
   }) {
     return (
@@ -25,7 +25,7 @@ export default function TodoItem({
 
         <ButtonGroup spacing='3' >
 
-        <Button colorScheme='green' onClick={() => onEditClick(todo)}>Edit</Button>
+        {/* <Button colorScheme='green' onClick={() => onEditClick(todo)}>Edit</Button> */}
         <Button colorScheme='red' onClick={() => onDeleteClick(todo.id)}>Delete</Button>
         </ButtonGroup>
           </Td>

@@ -25,6 +25,7 @@ interface Todo {
 function App() {
   const [todos, setTodos] = useState<Todo[]>(() => {
     const savedTodos = localStorage.getItem("todos");
+
     if (savedTodos) {
       return JSON.parse(savedTodos);
     } else {
@@ -36,15 +37,15 @@ function App() {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   // object state to set so we know which todo item we are editing
 
-  const [currentTodo, setCurrentTodo] = useState<Todo>({});
+  // const [currentTodo, setCurrentTodo] = useState<Todo>({});
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     // set the new state value to what's currently in the input box
     setTodo(e.target.value);
   }
-  function handleEditInputChange(e: ChangeEvent<HTMLInputElement>) {
-    setCurrentTodo({ ...currentTodo, text: e.target.value });
-    console.log(currentTodo);
-  }
+  // function handleEditInputChange(e: ChangeEvent<HTMLInputElement>) {
+  //   setCurrentTodo({ ...currentTodo, text: e.target.value });
+  //   console.log(currentTodo);
+  // }
   function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
@@ -70,16 +71,16 @@ function App() {
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
-  function handleEditClick(todo: Todo) {
-    // set editing to true
-    setIsEditing(true);
-    setCurrentTodo({ ...todo });
-  }
-  function handleEditFormSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  // function handleEditClick(todo: Todo) {
+  //   // set editing to true
+  //   setIsEditing(true);
+  //   setCurrentTodo({ ...todo });
+  // }
+  // function handleEditFormSubmit(e: React.FormEvent<HTMLFormElement>) {
+  //   e.preventDefault();
 
-    handleUpdateTodo(currentTodo.id, currentTodo);
-  }
+  //   handleUpdateTodo(currentTodo.id, currentTodo);
+  // }
   function handleUpdateTodo(id: number, updatedTodo: Todo) {
     const updatedItem = todos.map((todo) => {
       return todo.id === id ? updatedTodo : todo;
@@ -100,7 +101,7 @@ function App() {
           color="black"
           maxW="md"
         >
-          {isEditing ? (
+          {/* {isEditing ? (
             <form onSubmit={handleEditFormSubmit}>
               <h2>Edit Todo</h2>
 
@@ -123,7 +124,7 @@ function App() {
                 </Button>
               </ButtonGroup>
             </form>
-          ) : (
+          ) : ( */}
             <form onSubmit={handleFormSubmit}>
               <FormControl>
                 <FormLabel htmlFor="email">Add a new todo</FormLabel>
@@ -141,7 +142,7 @@ function App() {
                 </Button>
               </ButtonGroup>
             </form>
-          )}
+          
           <TableContainer>
             <Table size="sm" variant="striped" colorScheme="gray">
               <Thead>
@@ -156,7 +157,7 @@ function App() {
                   <TodoItem
                     todo={todo}
                     onDeleteClick={handleDeleteClick}
-                    onEditClick={handleEditClick}
+                    
                   />
                 ))}
               </Tbody>
